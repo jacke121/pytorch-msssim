@@ -1,3 +1,30 @@
+
+
+import time
+
+import torch
+
+import cv2
+
+from pytorch_msssim import ssim, ms_ssim, SSIM, MS_SSIM
+
+X= torch.randn(1, 1, 224, 224)
+Y=X
+
+
+# X: (N,3,H,W) a batch of RGB images with values ranging from 0 to 255.
+# Y: (N,3,H,W)
+start=time.time()
+ssim_val = ssim( X, Y, data_range=255, size_average=False) # return (N,)
+ms_ssim_val = ms_ssim( X, Y, data_range=255, size_average=False ) #(N,)
+
+
+print(time.time()-start,ssim_val,ms_ssim_val)
+
+上面测试：
+需要30ms。
+
+
 # Pytorch MS-SSIM
 
 Fast and differentiable MS-SSIM and SSIM for pytorch 1.0+
